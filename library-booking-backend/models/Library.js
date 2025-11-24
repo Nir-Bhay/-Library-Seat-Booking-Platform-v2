@@ -133,11 +133,10 @@ librarySchema.index({ 'address.pincode': 1 });
 librarySchema.index({ isApproved: 1, isActive: 1 });
 
 // Calculate available seats before saving
-librarySchema.pre('save', function(next) {
+librarySchema.pre('save', function () {
   if (this.isNew || this.isModified('totalSeats')) {
     this.availableSeats = this.totalSeats;
   }
-  next();
 });
 
 module.exports = mongoose.model('Library', librarySchema);

@@ -88,14 +88,13 @@ bookingSchema.index({ bookingStatus: 1 });
 bookingSchema.index({ paymentStatus: 1 });
 
 // Generate booking ID before saving
-bookingSchema.pre('save', async function(next) {
+bookingSchema.pre('save', async function () {
   if (this.isNew) {
     const date = new Date();
     const dateStr = date.toISOString().slice(0, 10).replace(/-/g, '');
     const randomNum = Math.floor(10000 + Math.random() * 90000);
     this.bookingId = `BK-${dateStr}-${randomNum}`;
   }
-  next();
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);

@@ -45,7 +45,7 @@ const timeSlotSchema = new mongoose.Schema({
 timeSlotSchema.index({ library_id: 1, isActive: 1 });
 
 // Calculate duration before saving
-timeSlotSchema.pre('save', function(next) {
+timeSlotSchema.pre('save', function () {
   if (this.isModified('startTime') || this.isModified('endTime')) {
     const [startHour, startMin] = this.startTime.split(':').map(Number);
     const [endHour, endMin] = this.endTime.split(':').map(Number);
@@ -53,7 +53,6 @@ timeSlotSchema.pre('save', function(next) {
     const endMinutes = endHour * 60 + endMin;
     this.duration = (endMinutes - startMinutes) / 60;
   }
-  next();
 });
 
 module.exports = mongoose.model('TimeSlot', timeSlotSchema);
