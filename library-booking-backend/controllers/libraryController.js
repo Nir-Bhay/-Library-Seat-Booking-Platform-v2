@@ -165,6 +165,16 @@ const createLibrary = async (req, res) => {
     // Parse address if needed
     if (typeof libraryData.address === 'string') {
       libraryData.address = JSON.parse(libraryData.address);
+    } else if (req.body['address[street]']) {
+      // Handle FormData address fields
+      libraryData.address = {
+        street: req.body['address[street]'] || '',
+        area: req.body['address[area]'] || '',
+        city: req.body['address[city]'] || '',
+        state: req.body['address[state]'] || '',
+        pincode: req.body['address[pincode]'] || '',
+        landmark: req.body['address[landmark]'] || ''
+      };
     }
 
     const library = await Library.create(libraryData);
@@ -240,6 +250,16 @@ const updateLibrary = async (req, res) => {
     }
     if (typeof updateData.address === 'string') {
       updateData.address = JSON.parse(updateData.address);
+    } else if (req.body['address[street]']) {
+      // Handle FormData address fields
+      updateData.address = {
+        street: req.body['address[street]'] || '',
+        area: req.body['address[area]'] || '',
+        city: req.body['address[city]'] || '',
+        state: req.body['address[state]'] || '',
+        pincode: req.body['address[pincode]'] || '',
+        landmark: req.body['address[landmark]'] || ''
+      };
     }
 
     library = await Library.findByIdAndUpdate(req.params.id, updateData, {

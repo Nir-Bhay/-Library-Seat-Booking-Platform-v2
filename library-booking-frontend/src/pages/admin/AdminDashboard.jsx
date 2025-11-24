@@ -22,7 +22,8 @@ const AdminDashboard = () => {
       setStats(data);
       setError(null);
     } catch (err) {
-      setError(err.message || 'Failed to fetch dashboard stats');
+      const errorMessage = err?.error || err?.message || 'Failed to fetch dashboard stats';
+      setError(errorMessage);
       console.error('Error fetching dashboard stats:', err);
     } finally {
       setLoading(false);
