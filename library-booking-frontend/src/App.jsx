@@ -15,6 +15,21 @@ import BookingPage from './pages/BookingPage';
 import MyBookings from './pages/MyBookings';
 import Profile from './pages/Profile';
 
+// Admin Pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import PendingApprovals from './pages/admin/PendingApprovals';
+import UserManagement from './pages/admin/UserManagement';
+import LibraryManagement from './pages/admin/LibraryManagement';
+import BookingManagement from './pages/admin/BookingManagement';
+import CommissionReport from './pages/admin/CommissionReport';
+import PlatformSettings from './pages/admin/PlatformSettings';
+
+// Librarian Pages
+import LibrarianDashboard from './pages/librarian/LibrarianDashboard';
+import AddEditLibrary from './pages/librarian/AddEditLibrary';
+import TimeSlots from './pages/librarian/TimeSlots';
+import LibrarianBookings from './pages/librarian/LibrarianBookings';
+
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,6 +94,106 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/pending-approvals"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <PendingApprovals />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <UserManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/libraries"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <LibraryManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/bookings"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <BookingManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/commission-report"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <CommissionReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <PlatformSettings />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Librarian routes */}
+        <Route
+          path="/librarian/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={['librarian']}>
+              <LibrarianDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/librarian/add-library"
+          element={
+            <ProtectedRoute allowedRoles={['librarian']}>
+              <AddEditLibrary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/librarian/edit-library/:id"
+          element={
+            <ProtectedRoute allowedRoles={['librarian']}>
+              <AddEditLibrary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/librarian/time-slots/:libraryId"
+          element={
+            <ProtectedRoute allowedRoles={['librarian']}>
+              <TimeSlots />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/librarian/bookings"
+          element={
+            <ProtectedRoute allowedRoles={['librarian']}>
+              <LibrarianBookings />
             </ProtectedRoute>
           }
         />
