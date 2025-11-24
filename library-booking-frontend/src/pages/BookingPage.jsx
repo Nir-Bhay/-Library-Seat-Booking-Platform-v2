@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLibrary } from '../hooks/useLibrary';
-import { useCreateBooking, useCheckAvailability } from '../hooks/useBooking';
+import { useCreateBooking } from '../hooks/useBooking';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
