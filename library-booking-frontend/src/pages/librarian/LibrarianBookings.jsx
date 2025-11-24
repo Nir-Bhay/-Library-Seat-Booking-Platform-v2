@@ -101,7 +101,7 @@ const LibrarianBookings = () => {
           >
             {libraries.map((library) => (
               <option key={library._id} value={library._id}>
-                {library.name}
+                {library.libraryName}
               </option>
             ))}
           </select>

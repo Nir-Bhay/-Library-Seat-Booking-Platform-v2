@@ -23,18 +23,21 @@ const LibrarianDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const librariesData = await librarianService.getMyLibraries();
-      setLibraries(librariesData || []);
+      const response = await librarianService.getMyLibraries();
+      const librariesData = response.data || [];
+      setLibraries(librariesData);
       
       // Calculate basic stats
       setStats({
-        totalLibraries: librariesData?.length || 0,
+        totalLibraries: librariesData.length,
         totalBookings: 0, // This would come from bookings API
         totalRevenue: 0,
       });
     } catch (error) {
-      toast.error('Failed to fetch dashboard data');
+      const errorMessage = error?.error || error?.message || 'Failed to fetch dashboard data';
+      toast.error(errorMessage);
       console.error('Error:', error);
+      setLibraries([]);
     } finally {
       setLoading(false);
     }
@@ -131,13 +134,13 @@ const LibrarianDashboard = () => {
                   {library.images && library.images.length > 0 && (
                     <img
                       src={library.images[0]}
-                      alt={library.name}
+                      alt={library.libraryName}
                       className="w-full h-48 object-cover"
                     />
                   )}
                   <div className="p-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {library.name}
+                      {library.libraryName}
                     </h3>
                     <div className="space-y-1 text-sm mb-4">
                       <p>

@@ -26,8 +26,10 @@ const LibraryManagement = () => {
         totalPages: response.pagination?.pages || 1,
       });
     } catch (error) {
-      toast.error('Failed to fetch libraries');
+      const errorMessage = error?.error || error?.message || 'Failed to fetch libraries';
+      toast.error(errorMessage);
       console.error('Error:', error);
+      setLibraries([]);
     } finally {
       setLoading(false);
     }
@@ -55,13 +57,13 @@ const LibraryManagement = () => {
               {library.images && library.images.length > 0 && (
                 <img
                   src={library.images[0]}
-                  alt={library.name}
+                  alt={library.libraryName}
                   className="w-full h-48 object-cover"
                 />
               )}
               <div className="p-4">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {library.name}
+                  {library.libraryName}
                 </h3>
                 <div className="flex items-start gap-2 text-sm text-gray-600 mb-3">
                   <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
