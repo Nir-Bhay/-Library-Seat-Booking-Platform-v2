@@ -5,7 +5,6 @@ import { MapPin, Eye } from 'lucide-react';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Loader from '../../components/common/Loader';
-import { formatCurrency } from '../../utils/helpers';
 import toast from 'react-hot-toast';
 
 const LibraryManagement = () => {

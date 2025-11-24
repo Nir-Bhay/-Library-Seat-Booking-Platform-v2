@@ -5,7 +5,7 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Loader from '../components/common/Loader';
 import Modal from '../components/common/Modal';
-import { formatCurrency, formatDate, formatTime, getStatusColor } from '../utils/helpers';
+import { formatCurrency, formatDate, getStatusColor } from '../utils/helpers';
 
 const MyBookings = () => {
   const [statusFilter, setStatusFilter] = useState('');
