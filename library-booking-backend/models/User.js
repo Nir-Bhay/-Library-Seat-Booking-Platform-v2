@@ -48,9 +48,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes
-userSchema.index({ email: 1 });
-userSchema.index({ phone: 1 });
+// Indexes - email and phone already indexed via unique: true
 userSchema.index({ role: 1 });
 
 // Hash password before saving
