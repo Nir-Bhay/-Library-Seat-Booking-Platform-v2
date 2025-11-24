@@ -67,8 +67,7 @@ body {
 
 .input:focus {
   outline: none;
-  ring: 2px;
-  ring-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary);
   border-color: transparent;
 }
 
