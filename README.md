@@ -1,3 +1,255 @@
+# Library Seat Booking Platform
+
+A complete full-stack web application for library seat booking with role-based access for Users, Librarians, and Admins.
+
+## 🚀 Project Overview
+
+This platform allows:
+- **Users (Students)** to search libraries by location, view details, select seats, and book with payment
+- **Librarians** to register, add their libraries, manage seats/slots, and view bookings
+- **Admins** to approve libraries, manage users, and track commission revenue
+
+## 📦 Tech Stack
+
+### Backend
+- Node.js v18+ with Express.js
+- MongoDB with Mongoose ODM
+- JWT authentication with bcrypt
+- Razorpay payment integration
+- Cloudinary for image storage
+- Rate limiting and security headers
+
+### Frontend
+- React.js v18+ with Vite
+- React Router DOM v6
+- Tailwind CSS for styling
+- React Query for state management
+- React Hook Form with Zod validation
+- Axios for API calls
+- Lucide React for icons
+
+## 📁 Project Structure
+
+```
+.
+├── library-booking-backend/    # Backend API server
+│   ├── config/                 # Configuration files
+│   ├── controllers/            # Route controllers
+│   ├── models/                 # Database models
+│   ├── routes/                 # API routes
+│   ├── middleware/             # Custom middleware
+│   ├── utils/                  # Utility functions
+│   └── scripts/                # Seed scripts
+│
+└── library-booking-frontend/   # Frontend React app
+    ├── src/
+    │   ├── components/         # Reusable components
+    │   ├── pages/              # Page components
+    │   ├── services/           # API services
+    │   ├── context/            # React context
+    │   ├── hooks/              # Custom hooks
+    │   └── utils/              # Utility functions
+    └── public/                 # Static assets
+```
+
+## 🛠️ Setup Instructions
+
+### Backend Setup
+
+1. Navigate to backend directory:
+```bash
+cd library-booking-backend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create `.env` file (see `.env.example`):
+```env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/library-booking
+JWT_SECRET=your-super-secret-jwt-key-minimum-32-characters-long
+JWT_EXPIRE=7d
+RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxxx
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+FRONTEND_URL=http://localhost:5173
+```
+
+4. Seed database with initial data:
+```bash
+npm run seed
+```
+
+5. Start the server:
+```bash
+npm start
+```
+
+Backend runs on `http://localhost:5000`
+
+### Frontend Setup
+
+1. Navigate to frontend directory:
+```bash
+cd library-booking-frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create `.env` file (see `.env.example`):
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxxx
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+Frontend runs on `http://localhost:5173`
+
+## 🔑 Test Credentials
+
+After running the seed script, use these credentials:
+
+### Admin
+- Email: `admin@library.com`
+- Password: `Admin@123`
+
+### Librarian
+- Email: `raj@library.com`
+- Password: `password123`
+
+### User
+- Email: `john@example.com`
+- Password: `password123`
+
+## ✨ Key Features
+
+### User Features
+- Browse and search libraries by location
+- Filter by price, amenities, and rating
+- View library details with images and amenities
+- Check seat availability in real-time
+- Book seats with date and time slot selection
+- Secure payment via Razorpay
+- View booking history
+- Cancel bookings (24 hours before)
+
+### Librarian Features
+- Register and create library profile
+- Upload library images (max 5)
+- Add amenities and set pricing
+- Create and manage time slots
+- View all bookings for their library
+- Track revenue and booking statistics
+
+### Admin Features
+- Approve or reject library registrations
+- Manage all users (activate/deactivate)
+- View all libraries and bookings
+- Generate commission reports
+- Configure platform settings (commission %, tax, etc.)
+- Dashboard with platform statistics
+
+## 🎨 Design
+
+### Color Scheme
+- Primary: #3B82F6 (Blue 500)
+- Primary Hover: #2563EB (Blue 600)
+- Success: #10B981 (Green)
+- Error: #EF4444 (Red)
+- Warning: #F59E0B (Orange)
+
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: 768px (tablet), 1024px (desktop)
+- Fully responsive across all devices
+
+## 🔒 Security Features
+
+- Password hashing with bcrypt
+- JWT token authentication
+- Role-based authorization
+- Rate limiting (100 req/15min)
+- CORS configuration
+- Input validation and sanitization
+- XSS protection
+- Secure payment processing
+
+## 📚 API Documentation
+
+Complete API documentation available in `library-booking-backend/README.md`
+
+### Main Endpoints
+- `/api/auth/*` - Authentication routes
+- `/api/libraries/*` - Library management
+- `/api/bookings/*` - Booking operations
+- `/api/payment/*` - Payment processing
+- `/api/admin/*` - Admin operations
+
+## 💰 Payment Integration
+
+- Razorpay payment gateway integration
+- Secure payment verification
+- Automatic commission calculation (10%)
+- Transaction tracking
+- Settlement management
+
+## 📊 Database Schema
+
+7 main collections:
+1. **users** - User accounts
+2. **libraries** - Library information
+3. **time_slots** - Time slots for libraries
+4. **bookings** - Booking records
+5. **amenities** - Available amenities
+6. **transactions** - Payment transactions
+7. **admin_settings** - Platform settings
+
+## 🚧 Development Status
+
+### ✅ Completed
+- Complete backend API with all endpoints
+- Database models and relationships
+- Authentication and authorization
+- Payment integration
+- Frontend core setup and routing
+- UI components and layouts
+- Basic pages (Home, Login, Signup)
+
+### 🔄 In Progress
+- Library listing and details pages
+- Booking flow implementation
+- Dashboard pages for all roles
+- Additional feature pages
+
+## 📝 License
+
+ISC
+
+## 👥 Contributors
+
+Developed by Dipu Kumar (@Nir-Bhay)
+
+---
+
+## 🤖 Original System Prompt Documentation
+
+For the complete AI system prompt and detailed specifications, see below:
+
+---
+
 🤖 Complete AI System Prompt - Library Seat Booking Platform
 Project Name: Library Seat Booking Platform
 Budget: ₹45,000
