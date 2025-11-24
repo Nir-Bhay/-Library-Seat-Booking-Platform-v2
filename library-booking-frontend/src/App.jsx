@@ -9,6 +9,11 @@ import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import LibraryList from './pages/LibraryList';
+import LibraryDetails from './pages/LibraryDetails';
+import BookingPage from './pages/BookingPage';
+import MyBookings from './pages/MyBookings';
+import Profile from './pages/Profile';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -48,12 +53,35 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         
-        {/* Add more routes here as we build them */}
-        {/* User routes */}
-        {/* <Route path="/libraries" element={<LibraryList />} /> */}
-        {/* <Route path="/library/:id" element={<LibraryDetails />} /> */}
+        {/* Public routes */}
+        <Route path="/libraries" element={<LibraryList />} />
+        <Route path="/library/:id" element={<LibraryDetails />} />
         
-        {/* Protected routes will be added here */}
+        {/* Protected routes */}
+        <Route
+          path="/booking/:id"
+          element={
+            <ProtectedRoute>
+              <BookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-bookings"
+          element={
+            <ProtectedRoute>
+              <MyBookings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
