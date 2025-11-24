@@ -81,10 +81,9 @@ const bookingSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes
+// Indexes - bookingId already indexed via unique: true
 bookingSchema.index({ user_id: 1 });
 bookingSchema.index({ library_id: 1, bookingDate: 1 });
-bookingSchema.index({ bookingId: 1 });
 bookingSchema.index({ bookingStatus: 1 });
 bookingSchema.index({ paymentStatus: 1 });
 
