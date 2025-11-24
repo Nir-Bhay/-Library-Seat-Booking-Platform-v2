@@ -181,6 +181,7 @@ const AddEditLibrary = () => {
               required
               pattern="[0-9]{10}"
               placeholder="10-digit contact number"
+              minLength="10"
               maxLength="10"
             />
 

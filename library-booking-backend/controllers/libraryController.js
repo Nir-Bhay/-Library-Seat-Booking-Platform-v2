@@ -1,6 +1,23 @@
 const Library = require('../models/Library');
 const cloudinary = require('../config/cloudinary');
 
+// Helper function to parse address from FormData
+const parseAddressFromFormData = (reqBody) => {
+  if (typeof reqBody.address === 'string') {
+    return JSON.parse(reqBody.address);
+  } else if (reqBody['address[street]']) {
+    return {
+      street: reqBody['address[street]'] || '',
+      area: reqBody['address[area]'] || '',
+      city: reqBody['address[city]'] || '',
+      state: reqBody['address[state]'] || '',
+      pincode: reqBody['address[pincode]'] || '',
+      landmark: reqBody['address[landmark]'] || ''
+    };
+  }
+  return reqBody.address;
+};
+
 // @desc    Get all approved libraries with filters
 // @route   GET /api/libraries
 // @access  Public
@@ -162,20 +179,8 @@ const createLibrary = async (req, res) => {
       libraryData.daysOpen = JSON.parse(libraryData.daysOpen);
     }
 
-    // Parse address if needed
-    if (typeof libraryData.address === 'string') {
-      libraryData.address = JSON.parse(libraryData.address);
-    } else if (req.body['address[street]']) {
-      // Handle FormData address fields
-      libraryData.address = {
-        street: req.body['address[street]'] || '',
-        area: req.body['address[area]'] || '',
-        city: req.body['address[city]'] || '',
-        state: req.body['address[state]'] || '',
-        pincode: req.body['address[pincode]'] || '',
-        landmark: req.body['address[landmark]'] || ''
-      };
-    }
+    // Parse address using helper function
+    libraryData.address = parseAddressFromFormData(req.body);
 
     const library = await Library.create(libraryData);
 
@@ -248,19 +253,9 @@ const updateLibrary = async (req, res) => {
     if (typeof updateData.daysOpen === 'string') {
       updateData.daysOpen = JSON.parse(updateData.daysOpen);
     }
-    if (typeof updateData.address === 'string') {
-      updateData.address = JSON.parse(updateData.address);
-    } else if (req.body['address[street]']) {
-      // Handle FormData address fields
-      updateData.address = {
-        street: req.body['address[street]'] || '',
-        area: req.body['address[area]'] || '',
-        city: req.body['address[city]'] || '',
-        state: req.body['address[state]'] || '',
-        pincode: req.body['address[pincode]'] || '',
-        landmark: req.body['address[landmark]'] || ''
-      };
-    }
+    
+    // Parse address using helper function
+    updateData.address = parseAddressFromFormData(req.body);
 
     library = await Library.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
