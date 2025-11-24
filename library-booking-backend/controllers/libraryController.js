@@ -5,7 +5,7 @@ const cloudinary = require('../config/cloudinary');
 const parseAddressFromFormData = (reqBody) => {
   if (typeof reqBody.address === 'string') {
     return JSON.parse(reqBody.address);
-  } else if (reqBody['address[street]']) {
+  } else if (reqBody['address[street]'] || reqBody['address[area]'] || reqBody['address[city]']) {
     return {
       street: reqBody['address[street]'] || '',
       area: reqBody['address[area]'] || '',
@@ -15,7 +15,7 @@ const parseAddressFromFormData = (reqBody) => {
       landmark: reqBody['address[landmark]'] || ''
     };
   }
-  return reqBody.address;
+  return reqBody.address || {};
 };
 
 // @desc    Get all approved libraries with filters

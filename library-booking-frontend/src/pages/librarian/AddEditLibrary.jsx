@@ -172,18 +172,28 @@ const AddEditLibrary = () => {
               />
             </div>
 
-            <Input
-              label="Contact Number"
-              type="tel"
-              name="contactNumber"
-              value={formData.contactNumber}
-              onChange={handleChange}
-              required
-              pattern="[0-9]{10}"
-              placeholder="10-digit contact number"
-              minLength="10"
-              maxLength="10"
-            />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Contact Number <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                name="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+                pattern="^[0-9]{10}$"
+                placeholder="Enter 10-digit contact number"
+                minLength="10"
+                maxLength="10"
+                inputMode="numeric"
+                aria-describedby="contact-help"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <p id="contact-help" className="text-xs text-gray-500 mt-1">
+                Enter exactly 10 digits (e.g., 9876543210)
+              </p>
+            </div>
 
             <div className="border-t pt-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Address</h3>
