@@ -26,8 +26,10 @@ const PendingApprovals = () => {
         totalPages: response.pagination?.pages || 1,
       });
     } catch (error) {
-      toast.error('Failed to fetch pending libraries');
+      const errorMessage = error?.error || error?.message || 'Failed to fetch pending libraries';
+      toast.error(errorMessage);
       console.error('Error:', error);
+      setLibraries([]);
     } finally {
       setLoading(false);
     }
@@ -40,7 +42,8 @@ const PendingApprovals = () => {
       toast.success('Library approved successfully');
       fetchPendingLibraries();
     } catch (error) {
-      toast.error(error.error || 'Failed to approve library');
+      const errorMessage = error?.error || error?.message || 'Failed to approve library';
+      toast.error(errorMessage);
     } finally {
       setActionLoading(null);
     }
@@ -56,7 +59,8 @@ const PendingApprovals = () => {
       toast.success('Library rejected');
       fetchPendingLibraries();
     } catch (error) {
-      toast.error(error.error || 'Failed to reject library');
+      const errorMessage = error?.error || error?.message || 'Failed to reject library';
+      toast.error(errorMessage);
     } finally {
       setActionLoading(null);
     }
@@ -90,7 +94,7 @@ const PendingApprovals = () => {
                   {/* Library Info */}
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {library.name}
+                      {library.libraryName}
                     </h3>
                     <div className="space-y-2 text-sm text-gray-600">
                       <div className="flex items-start gap-2">
@@ -134,7 +138,7 @@ const PendingApprovals = () => {
                       <div className="mb-4">
                         <img
                           src={library.images[0]}
-                          alt={library.name}
+                          alt={library.libraryName}
                           className="w-full h-48 object-cover rounded-lg"
                         />
                       </div>

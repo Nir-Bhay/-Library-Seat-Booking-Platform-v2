@@ -14,10 +14,11 @@ const AddEditLibrary = () => {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    libraryName: '',
     description: '',
     totalSeats: '',
     pricePerHour: '',
+    contactNumber: '',
     street: '',
     area: '',
     city: '',
@@ -34,12 +35,14 @@ const AddEditLibrary = () => {
   const fetchLibrary = async () => {
     try {
       setLoading(true);
-      const library = await libraryService.getLibrary(id);
+      const response = await libraryService.getLibrary(id);
+      const library = response.data;
       setFormData({
-        name: library.name || '',
+        libraryName: library.libraryName || '',
         description: library.description || '',
         totalSeats: library.totalSeats || '',
         pricePerHour: library.pricePerHour || '',
+        contactNumber: library.contactNumber || '',
         street: library.address?.street || '',
         area: library.address?.area || '',
         city: library.address?.city || '',
@@ -47,7 +50,8 @@ const AddEditLibrary = () => {
         pincode: library.address?.pincode || '',
       });
     } catch (error) {
-      toast.error('Failed to fetch library details');
+      const errorMessage = error?.error || error?.message || 'Failed to fetch library details';
+      toast.error(errorMessage);
       console.error('Error:', error);
     } finally {
       setLoading(false);
@@ -68,10 +72,11 @@ const AddEditLibrary = () => {
       setSubmitting(true);
       const data = new FormData();
       
-      data.append('name', formData.name);
+      data.append('libraryName', formData.libraryName);
       data.append('description', formData.description);
       data.append('totalSeats', formData.totalSeats);
       data.append('pricePerHour', formData.pricePerHour);
+      data.append('contactNumber', formData.contactNumber);
       data.append('address[street]', formData.street);
       data.append('address[area]', formData.area);
       data.append('address[city]', formData.city);
@@ -88,7 +93,8 @@ const AddEditLibrary = () => {
       
       navigate('/librarian/dashboard');
     } catch (error) {
-      toast.error(error.error || 'Failed to save library');
+      const errorMessage = error?.error || error?.message || 'Failed to save library';
+      toast.error(errorMessage);
       console.error('Error:', error);
     } finally {
       setSubmitting(false);
@@ -120,8 +126,8 @@ const AddEditLibrary = () => {
             <Input
               label="Library Name"
               type="text"
-              name="name"
-              value={formData.name}
+              name="libraryName"
+              value={formData.libraryName}
               onChange={handleChange}
               required
               placeholder="Enter library name"
@@ -165,6 +171,18 @@ const AddEditLibrary = () => {
                 placeholder="e.g., 50"
               />
             </div>
+
+            <Input
+              label="Contact Number"
+              type="tel"
+              name="contactNumber"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              required
+              pattern="[0-9]{10}"
+              placeholder="10-digit contact number"
+              maxLength="10"
+            />
 
             <div className="border-t pt-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Address</h3>
